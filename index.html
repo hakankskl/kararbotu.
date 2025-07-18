@@ -1,0 +1,251 @@
+
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <title>Kararbotu – Ruh Haline Göre Öneri Platformu</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        :root {
+            --bg: #0B0C10;
+            --card: #1F2833;
+            --accent: #FF6B00;
+            --text: #FFFFFF;
+            --muted: #AAAAAA;
+        }
+        body {
+            margin: 0;
+            font-family: "Segoe UI", sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+        }
+        header {
+            background-color: var(--card);
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 999;
+        }
+        header h1 {
+            color: var(--accent);
+            margin: 0;
+            font-size: 24px;
+        }
+        nav a {
+            color: var(--text);
+            margin: 0 15px;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        nav a:hover {
+            color: var(--accent);
+        }
+        .lang-switch {
+            background: transparent;
+            color: var(--text);
+            border: 1px solid var(--accent);
+            padding: 6px 12px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+            margin-left: 10px;
+        }
+        .container {
+            max-width: 1000px;
+            margin: 100px auto 50px;
+            padding: 20px;
+            text-align: center;
+        }
+        .card {
+            background-color: var(--card);
+            border: 1px solid var(--accent);
+            border-radius: 10px;
+            padding: 30px;
+            margin-bottom: 30px;
+        }
+        .card h2 {
+            color: var(--accent);
+            margin-bottom: 20px;
+        }
+        .suggestion {
+            font-size: 18px;
+            margin: 10px 0;
+        }
+        button {
+            background-color: var(--accent);
+            color: var(--text);
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        select, input[type="text"], input[type="email"], input[type="password"] {
+            padding: 10px;
+            border-radius: 6px;
+            margin: 10px 0;
+            width: 80%;
+            max-width: 300px;
+            border: none;
+        }
+        .footer {
+            text-align: center;
+            color: var(--muted);
+            padding: 40px 10px 20px;
+            font-size: 14px;
+        }
+        .auth-links {
+            display: flex;
+            gap: 15px;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Kararbotu</h1>
+    <nav>
+        <a href="#home">Anasayfa</a>
+        <a href="#favorites">Favoriler</a>
+        <a href="#about">Hakkımızda</a>
+        <a href="#share">Paylaş</a>
+        <div class="auth-links">
+            <a href="#login">Giriş Yap</a>
+            <a href="#signup">Üye Ol</a>
+        </div>
+        <button class="lang-switch" onclick="toggleLang()">EN</button>
+    </nav>
+</header>
+
+<div class="container" id="home">
+    <div class="card">
+        <h2>📺 Ne İzlesem?</h2>
+        <div class="suggestion" id="izle"></div>
+        <button onclick="yeniOneri('izle')">Yenile</button>
+    </div>
+    <div class="card">
+        <h2>🎧 Ne Dinlesem?</h2>
+        <div class="suggestion" id="dinle"></div>
+        <button onclick="yeniOneri('dinle')">Yenile</button>
+    </div>
+    <div class="card">
+        <h2>🍽️ Ne Yesem?</h2>
+        <div class="suggestion" id="ye"></div>
+        <button onclick="yeniOneri('ye')">Yenile</button>
+    </div>
+    <div class="card">
+        <h2>🎲 Ne Yapsam?</h2>
+        <div class="suggestion" id="yap"></div>
+        <button onclick="yeniOneri('yap')">Yenile</button>
+    </div>
+</div>
+
+<div class="container" id="about">
+    <div class="card">
+        <h2>Hakkımızda</h2>
+        <p>Kararbotu, ruh halinize göre hayatı kolaylaştıran öneriler sunar. Müzik, film, yemek, etkinlik gibi önerileri ruh halinize göre kişiselleştirerek sunar.</p>
+    </div>
+</div>
+
+<div class="container" id="login">
+    <div class="card">
+        <h2>Giriş Yap</h2>
+        <input type="email" placeholder="E-posta">
+        <br>
+        <input type="password" placeholder="Şifre">
+        <br>
+        <button>Giriş</button>
+    </div>
+</div>
+
+<div class="container" id="signup">
+    <div class="card">
+        <h2>Üye Ol</h2>
+        <input type="text" placeholder="Ad Soyad">
+        <br>
+        <input type="email" placeholder="E-posta">
+        <br>
+        <input type="password" placeholder="Şifre">
+        <br>
+        <button>Kaydol</button>
+    </div>
+</div>
+
+<div class="container" id="share">
+    <div class="card">
+        <h2>Paylaş</h2>
+        <p>Beğendiğiniz öneriyi paylaşmak için bağlantıyı kopyalayın:</p>
+        <input type="text" value="https://kararbotu.com" readonly>
+    </div>
+</div>
+
+<div class="footer">
+    © 2025 Kararbotu.com · Tüm hakları saklıdır.
+</div>
+
+<script>
+   const veriler = {
+  izle: [
+    "Inception", "Dark", "The Office", "Interstellar", "Peaky Blinders", "Breaking Bad", "Stranger Things", "Sherlock", "The Crown",
+    "Black Mirror", "The Queen’s Gambit", "Friends", "How I Met Your Mother", "Money Heist", "The Witcher", "Better Call Saul", "Narcos",
+    "Brooklyn Nine-Nine", "Severance", "Succession", "Rick and Morty", "The Last of Us", "Mr. Robot", "Mindhunter", "Fargo",
+    "Ozark", "BoJack Horseman", "House of the Dragon", "Game of Thrones", "The Mandalorian", "Lupin", "The Boys", "Invincible",
+    "The Bear", "Mad Men", "The Good Place", "The Umbrella Academy", "Lost", "Dexter", "The 100", "Prison Break", "Vikings",
+    "The Morning Show", "The Marvelous Mrs. Maisel", "Chernobyl", "The Haunting of Hill House", "You", "The Sandman", "Wednesday", "1899", "Squid Game"
+  ],
+
+  dinle: [
+    "Lo-fi chill beats", "Tarkan – Kuzu Kuzu", "Sezen Aksu – Gülümse", "Mabel Matiz", "Billie Eilish", "Taylor Swift", "Sertab Erener", 
+    "Ezhel", "Ceza", "Teoman", "Barış Manço", "Ajda Pekkan", "Yüzyüzeyken Konuşuruz", "Mor ve Ötesi", "Imagine Dragons", "Coldplay",
+    "Ed Sheeran", "Travis Scott", "Drake", "Hadise", "Adele", "Beyoncé", "Kanye West", "Shakira", "Zeynep Bastık",
+    "Kenan Doğulu", "Athena", "Manuş Baba", "Duman", "Haluk Levent", "Şebnem Ferah", "Pink Floyd", "Metallica", "Radiohead",
+    "Arctic Monkeys", "The Weeknd", "Lana Del Rey", "Imagine Dragons – Demons", "Mabel Matiz – Antidepresan", "Sıla – Vaziyetler",
+    "Nil Karaibrahimgil – Resmen Aşığım", "MFÖ – Ali Desidero", "Edis – Martılar", "Tuna Kiremitçi – Bu Aşk Burada Biter",
+    "Sufle – Kalp", "Can Bonomo – Meczup", "Melike Şahin – Tutuşmuş Beraber", "Billie Eilish – Lovely", "Selda Bağcan – Katip Arzuhalim Yaz Yare Böyle"
+  ],
+
+  ye: [
+    "Lahmacun", "Suşi", "Tavuklu salata", "Köfte ekmek", "Dondurma", "Pizza", "Makarna", "Menemen", "Tost", "Hamburger",
+    "İskender", "Etli nohut", "Karnıyarık", "Kuru fasulye", "Patates kızartması", "Çiğ köfte", "Simit", "Balık ekmek", "Kumpir",
+    "Mercimek çorbası", "Bulgur pilavı", "Mantı", "Gözleme", "Döner", "Pide", "Kebap", "Zeytinyağlı sarma", "Hünkar beğendi",
+    "Patlıcan musakka", "Tavuk şiş", "Köri soslu tavuk", "Mantar sote", "Sebzeli noodle", "Salata tabağı", "Çorba çeşitleri",
+    "Waffle", "Meyve tabağı", "Kavurma", "Sucuklu yumurta", "Kaşarlı menemen", "Kahvaltı tabağı", "Baklava", "Künefe",
+    "İrmik helvası", "Cheesecake", "Krem karamel", "Tiramisu", "Magnolia", "Kazandibi", "Supangle", "Lokma"
+  ],
+
+  yap: [
+    "Yürüyüşe çık", "Yeni bir tarif dene", "Film izle", "Oyun oyna", "Çizim yap", "Kitap oku", "Meditasyon yap", "Spora git",
+    "Podcast dinle", "Blog yaz", "Fotoğraf çek", "Bisiklete bin", "Ev temizliği yap", "Arkadaşını ara", "Yeni bir şey öğren",
+    "Yıldızları izle", "Müzik yap", "Origami dene", "Bahçeyle ilgilen", "Kamp yap", "YouTube videosu izle", "Diziye başla",
+    "Kendine hediye al", "Ev dekorasyonu yap", "Yeni bir beceri öğren", "Oda düzenle", "Resim boya", "Gitar çal", "Puzzle yap",
+    "Gönüllü ol", "Yeni uygulama keşfet", "Günlük yaz", "Kendine bakım yap", "Online kurs izle", "Zihin egzersizi yap",
+    "Hayal kur", "Bir podcast kaydet", "İnternette araştır", "Dijital detoks yap", "Evde yoga yap", "Sosyal medya detoksu yap",
+    "Plan yap", "Gelecek hedeflerini yaz", "Mim sanatını dene", "Dans et", "Gölge egzersizi yap", "İş planı hazırla",
+    "Kıyafetlerini ayıkla", "Dertleş", "Müzik listeni düzenle"
+  ]
+};
+
+    function yeniOneri(tur) {
+        const liste = veriler[tur];
+        const secim = liste[Math.floor(Math.random() * liste.length)];
+        document.getElementById(tur).innerText = secim;
+    }
+
+    function toggleLang() {
+        alert("Çok yakında İngilizce dil desteği eklenecek!");
+    }
+
+    window.onload = () => {
+        yeniOneri('izle');
+        yeniOneri('dinle');
+        yeniOneri('ye');
+        yeniOneri('yap');
+    };
+</script>
+
+</body>
+</html>
