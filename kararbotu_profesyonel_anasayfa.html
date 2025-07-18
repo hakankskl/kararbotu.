@@ -188,12 +188,46 @@
 </div>
 
 <script>
-    const veriler = {
-        izle: ["Inception", "Dark", "The Office", "Interstellar", "Peaky Blinders"],
-        dinle: ["Lo-fi chill beats", "Tarkan – Kuzu Kuzu", "Sezen Aksu – Gülümse", "Mabel Matiz", "Billie Eilish"],
-        ye: ["Lahmacun", "Suşi", "Tavuklu salata", "Köfte ekmek", "Dondurma"],
-        yap: ["Yürüyüşe çık", "Yeni bir tarif dene", "Film izle", "Oyun oyna", "Çizim yap"]
-    };
+   const veriler = {
+  izle: [
+    "Inception", "Dark", "The Office", "Interstellar", "Peaky Blinders", "Breaking Bad", "Stranger Things", "Sherlock", "The Crown",
+    "Black Mirror", "The Queen’s Gambit", "Friends", "How I Met Your Mother", "Money Heist", "The Witcher", "Better Call Saul", "Narcos",
+    "Brooklyn Nine-Nine", "Severance", "Succession", "Rick and Morty", "The Last of Us", "Mr. Robot", "Mindhunter", "Fargo",
+    "Ozark", "BoJack Horseman", "House of the Dragon", "Game of Thrones", "The Mandalorian", "Lupin", "The Boys", "Invincible",
+    "The Bear", "Mad Men", "The Good Place", "The Umbrella Academy", "Lost", "Dexter", "The 100", "Prison Break", "Vikings",
+    "The Morning Show", "The Marvelous Mrs. Maisel", "Chernobyl", "The Haunting of Hill House", "You", "The Sandman", "Wednesday", "1899", "Squid Game"
+  ],
+
+  dinle: [
+    "Lo-fi chill beats", "Tarkan – Kuzu Kuzu", "Sezen Aksu – Gülümse", "Mabel Matiz", "Billie Eilish", "Taylor Swift", "Sertab Erener", 
+    "Ezhel", "Ceza", "Teoman", "Barış Manço", "Ajda Pekkan", "Yüzyüzeyken Konuşuruz", "Mor ve Ötesi", "Imagine Dragons", "Coldplay",
+    "Ed Sheeran", "Travis Scott", "Drake", "Hadise", "Adele", "Beyoncé", "Kanye West", "Shakira", "Zeynep Bastık",
+    "Kenan Doğulu", "Athena", "Manuş Baba", "Duman", "Haluk Levent", "Şebnem Ferah", "Pink Floyd", "Metallica", "Radiohead",
+    "Arctic Monkeys", "The Weeknd", "Lana Del Rey", "Imagine Dragons – Demons", "Mabel Matiz – Antidepresan", "Sıla – Vaziyetler",
+    "Nil Karaibrahimgil – Resmen Aşığım", "MFÖ – Ali Desidero", "Edis – Martılar", "Tuna Kiremitçi – Bu Aşk Burada Biter",
+    "Sufle – Kalp", "Can Bonomo – Meczup", "Melike Şahin – Tutuşmuş Beraber", "Billie Eilish – Lovely", "Selda Bağcan – Katip Arzuhalim Yaz Yare Böyle"
+  ],
+
+  ye: [
+    "Lahmacun", "Suşi", "Tavuklu salata", "Köfte ekmek", "Dondurma", "Pizza", "Makarna", "Menemen", "Tost", "Hamburger",
+    "İskender", "Etli nohut", "Karnıyarık", "Kuru fasulye", "Patates kızartması", "Çiğ köfte", "Simit", "Balık ekmek", "Kumpir",
+    "Mercimek çorbası", "Bulgur pilavı", "Mantı", "Gözleme", "Döner", "Pide", "Kebap", "Zeytinyağlı sarma", "Hünkar beğendi",
+    "Patlıcan musakka", "Tavuk şiş", "Köri soslu tavuk", "Mantar sote", "Sebzeli noodle", "Salata tabağı", "Çorba çeşitleri",
+    "Waffle", "Meyve tabağı", "Kavurma", "Sucuklu yumurta", "Kaşarlı menemen", "Kahvaltı tabağı", "Baklava", "Künefe",
+    "İrmik helvası", "Cheesecake", "Krem karamel", "Tiramisu", "Magnolia", "Kazandibi", "Supangle", "Lokma"
+  ],
+
+  yap: [
+    "Yürüyüşe çık", "Yeni bir tarif dene", "Film izle", "Oyun oyna", "Çizim yap", "Kitap oku", "Meditasyon yap", "Spora git",
+    "Podcast dinle", "Blog yaz", "Fotoğraf çek", "Bisiklete bin", "Ev temizliği yap", "Arkadaşını ara", "Yeni bir şey öğren",
+    "Yıldızları izle", "Müzik yap", "Origami dene", "Bahçeyle ilgilen", "Kamp yap", "YouTube videosu izle", "Diziye başla",
+    "Kendine hediye al", "Ev dekorasyonu yap", "Yeni bir beceri öğren", "Oda düzenle", "Resim boya", "Gitar çal", "Puzzle yap",
+    "Gönüllü ol", "Yeni uygulama keşfet", "Günlük yaz", "Kendine bakım yap", "Online kurs izle", "Zihin egzersizi yap",
+    "Hayal kur", "Bir podcast kaydet", "İnternette araştır", "Dijital detoks yap", "Evde yoga yap", "Sosyal medya detoksu yap",
+    "Plan yap", "Gelecek hedeflerini yaz", "Mim sanatını dene", "Dans et", "Gölge egzersizi yap", "İş planı hazırla",
+    "Kıyafetlerini ayıkla", "Dertleş", "Müzik listeni düzenle"
+  ]
+};
 
     function yeniOneri(tur) {
         const liste = veriler[tur];
