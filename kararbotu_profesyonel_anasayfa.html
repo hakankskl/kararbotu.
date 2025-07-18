@@ -1,0 +1,217 @@
+
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <title>Kararbotu – Ruh Haline Göre Öneri Platformu</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        :root {
+            --bg: #0B0C10;
+            --card: #1F2833;
+            --accent: #FF6B00;
+            --text: #FFFFFF;
+            --muted: #AAAAAA;
+        }
+        body {
+            margin: 0;
+            font-family: "Segoe UI", sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+        }
+        header {
+            background-color: var(--card);
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 999;
+        }
+        header h1 {
+            color: var(--accent);
+            margin: 0;
+            font-size: 24px;
+        }
+        nav a {
+            color: var(--text);
+            margin: 0 15px;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        nav a:hover {
+            color: var(--accent);
+        }
+        .lang-switch {
+            background: transparent;
+            color: var(--text);
+            border: 1px solid var(--accent);
+            padding: 6px 12px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+            margin-left: 10px;
+        }
+        .container {
+            max-width: 1000px;
+            margin: 100px auto 50px;
+            padding: 20px;
+            text-align: center;
+        }
+        .card {
+            background-color: var(--card);
+            border: 1px solid var(--accent);
+            border-radius: 10px;
+            padding: 30px;
+            margin-bottom: 30px;
+        }
+        .card h2 {
+            color: var(--accent);
+            margin-bottom: 20px;
+        }
+        .suggestion {
+            font-size: 18px;
+            margin: 10px 0;
+        }
+        button {
+            background-color: var(--accent);
+            color: var(--text);
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        select, input[type="text"], input[type="email"], input[type="password"] {
+            padding: 10px;
+            border-radius: 6px;
+            margin: 10px 0;
+            width: 80%;
+            max-width: 300px;
+            border: none;
+        }
+        .footer {
+            text-align: center;
+            color: var(--muted);
+            padding: 40px 10px 20px;
+            font-size: 14px;
+        }
+        .auth-links {
+            display: flex;
+            gap: 15px;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Kararbotu</h1>
+    <nav>
+        <a href="#home">Anasayfa</a>
+        <a href="#favorites">Favoriler</a>
+        <a href="#about">Hakkımızda</a>
+        <a href="#share">Paylaş</a>
+        <div class="auth-links">
+            <a href="#login">Giriş Yap</a>
+            <a href="#signup">Üye Ol</a>
+        </div>
+        <button class="lang-switch" onclick="toggleLang()">EN</button>
+    </nav>
+</header>
+
+<div class="container" id="home">
+    <div class="card">
+        <h2>📺 Ne İzlesem?</h2>
+        <div class="suggestion" id="izle"></div>
+        <button onclick="yeniOneri('izle')">Yenile</button>
+    </div>
+    <div class="card">
+        <h2>🎧 Ne Dinlesem?</h2>
+        <div class="suggestion" id="dinle"></div>
+        <button onclick="yeniOneri('dinle')">Yenile</button>
+    </div>
+    <div class="card">
+        <h2>🍽️ Ne Yesem?</h2>
+        <div class="suggestion" id="ye"></div>
+        <button onclick="yeniOneri('ye')">Yenile</button>
+    </div>
+    <div class="card">
+        <h2>🎲 Ne Yapsam?</h2>
+        <div class="suggestion" id="yap"></div>
+        <button onclick="yeniOneri('yap')">Yenile</button>
+    </div>
+</div>
+
+<div class="container" id="about">
+    <div class="card">
+        <h2>Hakkımızda</h2>
+        <p>Kararbotu, ruh halinize göre hayatı kolaylaştıran öneriler sunar. Müzik, film, yemek, etkinlik gibi önerileri ruh halinize göre kişiselleştirerek sunar.</p>
+    </div>
+</div>
+
+<div class="container" id="login">
+    <div class="card">
+        <h2>Giriş Yap</h2>
+        <input type="email" placeholder="E-posta">
+        <br>
+        <input type="password" placeholder="Şifre">
+        <br>
+        <button>Giriş</button>
+    </div>
+</div>
+
+<div class="container" id="signup">
+    <div class="card">
+        <h2>Üye Ol</h2>
+        <input type="text" placeholder="Ad Soyad">
+        <br>
+        <input type="email" placeholder="E-posta">
+        <br>
+        <input type="password" placeholder="Şifre">
+        <br>
+        <button>Kaydol</button>
+    </div>
+</div>
+
+<div class="container" id="share">
+    <div class="card">
+        <h2>Paylaş</h2>
+        <p>Beğendiğiniz öneriyi paylaşmak için bağlantıyı kopyalayın:</p>
+        <input type="text" value="https://kararbotu.com" readonly>
+    </div>
+</div>
+
+<div class="footer">
+    © 2025 Kararbotu.com · Tüm hakları saklıdır.
+</div>
+
+<script>
+    const veriler = {
+        izle: ["Inception", "Dark", "The Office", "Interstellar", "Peaky Blinders"],
+        dinle: ["Lo-fi chill beats", "Tarkan – Kuzu Kuzu", "Sezen Aksu – Gülümse", "Mabel Matiz", "Billie Eilish"],
+        ye: ["Lahmacun", "Suşi", "Tavuklu salata", "Köfte ekmek", "Dondurma"],
+        yap: ["Yürüyüşe çık", "Yeni bir tarif dene", "Film izle", "Oyun oyna", "Çizim yap"]
+    };
+
+    function yeniOneri(tur) {
+        const liste = veriler[tur];
+        const secim = liste[Math.floor(Math.random() * liste.length)];
+        document.getElementById(tur).innerText = secim;
+    }
+
+    function toggleLang() {
+        alert("Çok yakında İngilizce dil desteği eklenecek!");
+    }
+
+    window.onload = () => {
+        yeniOneri('izle');
+        yeniOneri('dinle');
+        yeniOneri('ye');
+        yeniOneri('yap');
+    };
+</script>
+
+</body>
+</html>
